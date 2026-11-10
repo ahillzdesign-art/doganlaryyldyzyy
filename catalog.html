@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оптовый каталог — Doganlar Ýyldyzy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/style.css">
+    <style>
+        .catalog-pdf-btn { 
+            background: linear-gradient(135deg, #D97706, #FBBF24); 
+            color: #1A1816; 
+            padding: 6px 12px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-size: 10px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            white-space: nowrap; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3); 
+        }
+        .catalog-pdf-btn:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5); 
+        }
+        .lang-select { 
+            background: #1A1816; 
+            color: #FBBF24; 
+            border: 1px solid rgba(251,191,36,0.4); 
+            padding: 5px 8px; 
+            border-radius: 50px; 
+            font-size: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            outline: none; 
+        }
+
+        @media (min-width: 768px) {
+            .catalog-pdf-btn { padding: 8px 18px; font-size: 11px; }
+            .lang-select { padding: 6px 12px; font-size: 11px; }
+        }
+
+        @media (max-width: 768px) {
+            #brand-filters { 
+                flex-wrap: nowrap !important; 
+                overflow-x: auto !important; 
+                justify-content: flex-start !important; 
+                padding-bottom: 8px; 
+                -webkit-overflow-scrolling: touch; 
+            }
+            #brand-filters::-webkit-scrollbar { display: none; }
+            #brand-filters button { flex-shrink: 0; }
+        }
+    </style>
+</head>
+<body class="bg-[#2C1E1A] text-white font-sans antialiased">
+
+    <!-- ШАПКА -->
+    <header class="sticky top-0 z-50 bg-[#1A1816]/95 backdrop-blur-md text-white border-b border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 group">
+                <img src="assets/logo/factory-main.png" alt="Logo" class="h-10 sm:h-12 w-auto object-contain">
+                <span class="font-bold text-xs sm:text-xl tracking-wider text-amber-400 uppercase">Doganlar Ýyldyzy</span>
+            </a>
+            
+            <div class="flex items-center gap-2 sm:gap-6">
+                <nav class="hidden md:flex items-center gap-6 text-sm uppercase font-medium tracking-wider">
+                    <a href="index.html" class="hover:text-amber-400 transition-colors" data-i18n="nav-main">Главная</a>
+                    <a href="catalog.html" class="text-amber-400 font-bold" data-i18n="nav-catalog">Каталог</a>
+                </nav>
+
+                <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ (ВИДИМ ВЕЗДЕ) -->
+                <select id="langSwitch" class="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                    <option value="tk">TM</option>
+                </select>
+
+                <!-- КНОПКА PDF -->
+                <a href="catalog.pdf" download class="catalog-pdf-btn">Catalog 2026</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КАТАЛОГ -->
+    <main class="py-16 max-w-7xl mx-auto px-4">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-center uppercase tracking-wider mb-2 text-amber-400" data-i18n="cat-title">Оптовый Каталог продукции</h1>
+        <p class="text-center text-xs sm:text-base text-amber-100/70 mb-10" data-i18n="cat-subtitle">Нажмите на карточку товара, чтобы увеличить изображение</p>
+
+        <!-- Кнопки фильтрации на бренды -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12" id="brand-filters">
+            <button onclick="filterAndRender('all', this)" class="brand-tab active px-4 py-2 rounded-full bg-amber-500 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-md" data-i18n="brand-all">Все бренды</button>
+            <button onclick="filterAndRender('babella', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Babella</button>
+            <button onclick="filterAndRender('janym', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Janym</button>
+            <button onclick="filterAndRender('turkmenistan', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Türkmenistan</button>
+            <button onclick="filterAndRender('akyurek', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Akýürek</button>
+            <button onclick="filterAndRender('alyber', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Alyber!</button>
+            <button onclick="filterAndRender('merw', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Merw</button>
+            <button onclick="filterAndRender('baltop', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Baltop</button>
+            <button onclick="filterAndRender('altyndag', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Altyn Dag</button>
+            <button onclick="filterAndRender('mikoo', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Mikoo</button>
+            <button onclick="filterAndRender('chocoley', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Chocoley</button>
+            <button onclick="filterAndRender('syrdas', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Syrdas</button>
+            <button onclick="filterAndRender('lover', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Lover</button>
+            <button onclick="filterAndRender('morsello', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Morsello</button>
+            <button onclick="filterAndRender('karalina', this)" class="brand-tab px-4 py-2 rounded-full bg-[#1A1816] text-amber-200 border border-amber-900/40 font-bold text-xs uppercase tracking-wider hover:bg-amber-500 hover:text-black transition-all">Karalina</button>
+        </div>
+
+        <!-- Сетка товаров -->
+        <div id="catalog-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </main>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="imageModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 cursor-pointer" onclick="closeModal()">
+        <div class="relative max-w-3xl max-h-[90vh] p-4 bg-[#1A1816] border border-amber-500/40 rounded-2xl flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-3 right-4 text-amber-400 hover:text-white text-2xl font-bold">&times;</button>
+            <img id="modalImg" src="" alt="Zoom" class="max-h-[70vh] w-auto object-contain mb-3 rounded-lg">
+            <p id="modalTitle" class="text-sm font-bold text-amber-400 uppercase tracking-wide text-center"></p>
+        </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer class="bg-[#121110] text-[#D4C5B9] py-8 border-t border-amber-900/40 text-center text-xs">
+        <span data-i18n="footer-rights">© 2026 Кондитерская фабрика «Doganlar Ýyldyzy». Все права защищены.</span>
+    </footer>
+
+    <script src="src/main.js"></script>
+    <script>
+        const catalogTranslations = {
+            ru: { "nav-main": "Главная", "nav-catalog": "Каталог", "cat-title": "Оптовый Каталог продукции", "cat-subtitle": "Нажмите на карточку товара, чтобы увеличить изображение", "brand-all": "Все бренды", "footer-rights": "© 2026 Кондитерская фабрика «Doganlar Ýyldyzy». Все права защищены." },
+            en: { "nav-main": "Home", "nav-catalog": "Catalog", "cat-title": "Wholesale Product Catalog", "cat-subtitle": "Click on a product card to enlarge the image", "brand-all": "All Brands", "footer-rights": "© 2026 Confectionery Factory «Doganlar Ýyldyzy». All rights reserved." },
+            tk: { "nav-main": "Baş sahypa", "nav-catalog": "Katalog", "cat-title": "Lomaý Önüm Katalogy", "cat-subtitle": "Suraty ulaltmak üçin önüme basyň", "brand-all": "Ähli brendler", "footer-rights": "© 2026 «Doganlar Ýyldyzy» Konditer Fabrigi. Ähli hukuklar goralan." }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('site-lang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (catalogTranslations[lang][key]) el.textContent = catalogTranslations[lang][key];
+            });
+            document.getElementById('langSwitch').value = lang;
+        }
+
+        function filterAndRender(brand, btnElement = null) { renderProducts(brand, btnElement); }
+        function openModal(imgSrc, titleText) {
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalTitle').textContent = titleText;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.getElementById('imageModal').classList.add('flex');
+        }
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('flex');
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem('site-lang') || 'ru';
+            changeLanguage(savedLang);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandParam = urlParams.get('brand');
+            if (brandParam) {
+                const targetButton = Array.from(document.querySelectorAll('.brand-tab')).find(el => (el.getAttribute('onclick') || '').includes(`'${brandParam}'`));
+                renderProducts(brandParam, targetButton || null);
+            } else {
+                renderProducts('all');
+            }
+        });
+    </script>
+</body>
+</html>

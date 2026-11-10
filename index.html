@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">Doganlar Ýyldyzy — Кондитерская фабрика</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FBF9F5;
+            color: #2C1E1A;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- АНИМАЦИИ ГРАДИЕНТОВ --- */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animated-gradient-bg {
+            background: linear-gradient(135deg, #1A1816, #3D2922, #2C1E1A, #1F1411) !important;
+            background-size: 300% 300% !important;
+            animation: gradientMove 10s ease infinite !important;
+        }
+
+        .animated-gradient-light {
+            background: linear-gradient(135deg, #FBF9F5, #F4EFE6, #EFE7DC, #F7F3EC) !important;
+            background-size: 300% 300% !important;
+            animation: gradientMove 12s ease infinite !important;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(26, 24, 22, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            width: 100%;
+        }
+        .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .logo-area img {
+            height: 36px !important;
+            width: auto !important;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .logo-area:hover img {
+            transform: scale(1.08) rotate(-2deg);
+        }
+        .logo-area span {
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            color: #FBBF24;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover { color: #FBBF24; }
+
+        @media (max-width: 768px) {
+            nav { display: none; } /* Скрываем текстовое меню на телефонах, оставляя лого, язык и кнопку */
+            .logo-area span { font-size: 11px; } /* Делаем текст названия компактным на мобилках */
+            .header-container { padding: 0 10px; }
+        }
+
+        /* Переключатель языков */
+        .lang-select {
+            background: #2C1E1A;
+            color: #FBBF24;
+            border: 1px solid rgba(251,191,36,0.4);
+            padding: 5px 8px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .lang-select:hover { border-color: #FBBF24; }
+
+        /* Кнопка скачивания PDF каталога в шапке */
+        .catalog-pdf-btn {
+            background: linear-gradient(135deg, #D97706, #FBBF24);
+            color: #1A1816;
+            padding: 6px 12px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        .catalog-pdf-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+        }
+
+        /* --- HERO SLIDER --- */
+        .hero-section {
+            width: 100%;
+            aspect-ratio: 1920 / 800;
+            max-height: 700px;
+            min-height: 200px;
+            position: relative;
+            background: transparent !important;
+            overflow: hidden;
+        }
+        .heroSwiper {
+            width: 100%;
+            height: 100%;
+        }
+        .hero-slide-img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: 50% center;
+            background-repeat: no-repeat;
+        }
+
+        .swiper-pagination-bullet {
+            background: #ffffff !important;
+            opacity: 0.5 !important;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1 !important;
+            background: #FBBF24 !important;
+            width: 24px !important;
+            border-radius: 4px !important;
+        }
+
+        /* --- СЕТКА БРЕНДОВ (2 В РЯД) --- */
+        .brands-section {
+            width: 100%;
+            padding: 90px 20px;
+        }
+        .brands-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .brands-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #2C1E1A;
+        }
+        .brands-subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #8C6D53;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 40px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .brands-grid { grid-template-columns: 1fr; gap: 20px; }
+            .hero-section { 
+                aspect-ratio: 16 / 9; 
+                height: auto;
+            }
+            .hero-slide-img {
+                background-position: 45% center !important; 
+            }
+            .brands-section {
+                padding: 40px 15px !important;
+            }
+            .brands-subtitle {
+                margin-bottom: 25px !important;
+            }
+            .brands-title {
+                font-size: 20px !important;
+            }
+        }
+
+        .reveal-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.97);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Карточка бренда: пропорция 2.1 : 1 */
+        .brand-card-corel {
+            width: 100%;
+            aspect-ratio: 2.1 / 1;
+            position: relative;
+            overflow: visible !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+            border: 2px solid rgba(212, 175, 55, 0.25);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .brand-card-corel:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 22px 45px rgba(0,0,0,0.35), 0 0 25px rgba(251, 191, 36, 0.25);
+            border-color: rgba(251, 191, 36, 0.7);
+        }
+
+        /* Фоновые классы брендов */
+        .fon-babella { background-image: url('assets/brands/babella-fon.png'); background-color: #EE1D23; }
+        .fon-janym { background-image: url('assets/brands/janym-fon.png'); background-color: #3D2C1E; }
+        .fon-turkmenistan { background-image: url('assets/brands/turkmenistan-fon.png'); background-color: #0A1224; }
+        .fon-akyurek { background-image: url('assets/brands/akyurek-fon.png'); background-color: #E8D3A8; }
+        .fon-alyber { background-image: url('assets/brands/alyber-fon.png'); background-color: #3D2216; }
+        .fon-merw { background-image: url('assets/brands/merw-fon.png'); background-color: #5C1D24; }
+        .fon-altyndag { background-image: url('assets/brands/altyndag-fon.png'); background-color: #111111; }
+        .fon-mikoo { background-image: url('assets/brands/mikoo-fon.png'); background-color: #5E178C; }
+        .fon-chocoley { background-image: url('assets/brands/chocoley-fon.png'); background-color: #C4A876; }
+        .fon-syrdas { background-image: url('assets/brands/syrdas-fon.png'); background-color: #3D2216; }
+        .fon-lover { background-image: url('assets/brands/lover-fon.png'); background-color: #3D1412; }
+        .fon-syrdaspasta { background-image: url('assets/brands/syrdaspasta-fon.png'); background-color: #0A2240; }
+        .fon-morsello { background-image: url('assets/brands/morsello-fon.png'); background-color: #FFFFFF; }
+        .fon-karalina { background-image: url('assets/brands/karalina-fon.png'); background-color: #111111; }
+
+        /* Базовые размеры по умолчанию */
+        .brand-logo-perf {
+            position: absolute;
+            height: 42%;
+            width: auto;
+            left: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            object-fit: contain;
+            transition: transform 0.4s ease;
+            z-index: 2;
+        }
+
+        .brand-product-perf {
+            position: absolute;
+            height: 85%;
+            width: auto;
+            right: -10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: floatProduct 5s ease-in-out infinite alternate;
+            z-index: 3;
+        }
+
+        /* --- ТОЧНЫЕ НАСТРОЙКИ РАЗМЕРОВ (COREL) --- */
+        a[href*="brand=janym"] .brand-logo-perf { height: 32% !important; left: 6% !important; }
+        a[href*="brand=janym"] .brand-product-perf { height: 78% !important; right: -10% !important; }
+
+        a[href*="brand=alyber"] .brand-logo-perf { height: 44% !important; left: 7% !important; }
+        a[href*="brand=alyber"] .brand-product-perf { height: 87% !important; right: -12% !important; }
+
+        a[href*="brand=merw"] .brand-logo-perf { height: 50% !important; left: 7% !important; }
+        a[href*="brand=merw"] .brand-product-perf { height: 110% !important; right: -12% !important; }
+
+        a[href*="brand=altyndag"] .brand-logo-perf { height: 33% !important; left: 3% !important; }
+        a[href*="brand=altyndag"] .brand-product-perf { height: 60% !important; right: -8% !important; }
+
+        a[href*="brand=mikoo"] .brand-logo-perf { height: 65% !important; left: 12% !important; }
+        a[href*="brand=mikoo"] .brand-product-perf { height: 105% !important; right: -12% !important; }
+
+        a[href*="brand=chocoley"] .brand-logo-perf { height: 90% !important; left: 0% !important; }
+        a[href*="brand=chocoley"] .brand-product-perf { height: 82% !important; right: -12% !important; }
+
+        a[href*="brand=syrdas"]:not([href*="pusta"]) .brand-logo-perf { height: 55% !important; left: 7% !important; }
+        a[href*="brand=syrdas"]:not([href*="pusta"]) .brand-product-perf { height: 82% !important; right: -12% !important; }
+
+        a[href*="brand=syrdaspasta"] .brand-logo-perf { height: 38% !important; left: 7% !important; }
+        a[href*="brand=syrdaspasta"] .brand-product-perf { height: 82% !important; right: 2% !important; }
+
+        a[href*="brand=lover"] .brand-logo-perf { height: 70% !important; left: 10% !important; }
+        a[href*="brand=lover"] .brand-product-perf { height: 70% !important; right: -10% !important; }
+        
+        a[href*="brand=karalina"] .brand-logo-perf { height: 50% !important; left: 10% !important; }
+        a[href*="brand=karalina"] .brand-product-perf { height: 75% !important; right: -15% !important; }
+
+
+        .brand-card-corel:nth-child(even) .brand-product-perf {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatProduct {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-56%) rotate(1.5deg); }
+            100% { transform: translateY(-50%) rotate(0deg); }
+        }
+
+        .brand-card-corel:hover .brand-logo-perf {
+            transform: translateY(-50%) scale(1.06);
+        }
+        .brand-card-corel:hover .brand-product-perf {
+            transform: translateY(-55%) scale(1.12) rotate(3deg) !important;
+        }
+
+        /* --- СЕРТИФИКАТЫ --- */
+        .certificates-section {
+            width: 100%;
+            padding: 70px 20px;
+        }
+        .cert-card { text-align: center; padding: 10px; }
+        .cert-img {
+            max-height: 320px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
+            cursor: pointer;
+        }
+        .cert-card:hover .cert-img {
+            transform: translateY(-8px) scale(1.05);
+            filter: drop-shadow(0 18px 30px rgba(212, 175, 55, 0.4));
+        }
+
+        /* --- ФУТЕР --- */
+        footer {
+            width: 100%;
+            padding: 60px 20px 25px;
+            color: #D4C5B9;
+        }
+        .footer-grid {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            margin-bottom: 35px;
+        }
+        footer h3 { color: #FBBF24; font-size: 13px; text-transform: uppercase; margin-bottom: 15px; }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 8px; }
+        footer ul li a { color: #D4C5B9; text-decoration: none; font-size: 12px; transition: color 0.3s ease; }
+        footer ul li a:hover { color: #fff; }
+
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .footer-soc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+        .footer-soc-btn:hover { transform: scale(1.05); }
+        .soc-ig { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF); }
+
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo-area">
+                <img src="assets/logo/factory-main.png" alt="Logo">
+                <span>Doganlar Ýyldyzy</span>
+            </a>
+            
+            <div class="header-right">
+                <nav>
+                    <a href="#brands" data-i18n="nav-brands">Бренды</a>
+                    <a href="#certificates" data-i18n="nav-quality">Качество</a>
+                    <a href="catalog.html" data-i18n="nav-catalog">Каталог</a>
+                </nav>
+                <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ -->
+                <select id="langSwitch" class="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                    <option value="tk">TM</option>
+                </select>
+                <a href="catalog.pdf" download class="catalog-pdf-btn" data-i18n="btn-catalog">Catalog 2026</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SLIDER -->
+    <section class="hero-section">
+        <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="padding: 0;">
+                    <div class="hero-slide-img" style="background-image: url('assets/banner/banner-1.jpg');"></div>
+                </div>
+                <div class="swiper-slide" style="padding: 0;">
+                    <div class="hero-slide-img" style="background-image: url('assets/banner/banner-2.jpg');"></div>
+                </div>
+                <div class="swiper-slide" style="padding: 0;">
+                    <div class="hero-slide-img" style="background-image: url('assets/banner/banner-3.jpg');"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- СУББРЕНДЫ (ВСЕ 14 БРЕНДОВ) -->
+    <section id="brands" class="brands-section animated-gradient-light">
+        <div class="brands-container">
+            <h2 class="brands-title" data-i18n="main-title">Кондитерская фабрика «Doganlar Ýyldyzy»</h2>
+            <p class="brands-subtitle" data-i18n="main-subtitle">Нажмите на бренд для перехода в оптовый каталог</p>
+            
+            <div class="brands-grid">
+                
+                <!-- 1. Babella -->
+                <a href="catalog.html?brand=babella" class="brand-card-corel reveal-card fon-babella">
+                    <img src="assets/brands/babella-logo.png" alt="Babella" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/babella-product.png" alt="Babella Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 2. Janym -->
+                <a href="catalog.html?brand=janym" class="brand-card-corel reveal-card fon-janym">
+                    <img src="assets/brands/janym-logo.png" alt="Janym" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/janym-product.png" alt="Janym Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 3. Türkmenistan -->
+                <a href="catalog.html?brand=turkmenistan" class="brand-card-corel reveal-card fon-turkmenistan">
+                    <img src="assets/brands/turkmenistan-logo.png" alt="Türkmenistan" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/turkmenistan-product.png" alt="Türkmenistan Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 4. Akýürek -->
+                <a href="catalog.html?brand=akyurek" class="brand-card-corel reveal-card fon-akyurek">
+                    <img src="assets/brands/akyurek-logo.png" alt="Akýürek" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/akyurek-product.png" alt="Akýürek Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 5. Alyber! -->
+                <a href="catalog.html?brand=alyber" class="brand-card-corel reveal-card fon-alyber">
+                    <img src="assets/brands/alyber-logo.png" alt="Alyber" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/alyber-product.png" alt="Alyber Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 6. Merw -->
+                <a href="catalog.html?brand=merw" class="brand-card-corel reveal-card fon-merw">
+                    <img src="assets/brands/merw-logo.png" alt="Merw" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/merw-product.png" alt="Merw Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 7. Altyn Dag -->
+                <a href="catalog.html?brand=altyndag" class="brand-card-corel reveal-card fon-altyndag">
+                    <img src="assets/brands/altyndag-logo.png" alt="Altyn Dag" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/altyndag-product.png" alt="Altyn Dag Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 8. Mikoo -->
+                <a href="catalog.html?brand=mikoo" class="brand-card-corel reveal-card fon-mikoo">
+                    <img src="assets/brands/mikoo-logo.png" alt="Mikoo" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/mikoo-product.png" alt="Mikoo Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 9. Chocoley -->
+                <a href="catalog.html?brand=chocoley" class="brand-card-corel reveal-card fon-chocoley">
+                    <img src="assets/brands/chocoley-logo.png" alt="Chocoley" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/chocoley-product.png" alt="Chocoley Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 10. Syrdas (Chocolate) -->
+                <a href="catalog.html?brand=syrdas" class="brand-card-corel reveal-card fon-syrdas">
+                    <img src="assets/brands/syrdas-logo.png" alt="Syrdas" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/syrdas-product.png" alt="Syrdas Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 11. Syrdas (Pasta) -->
+                <a href="catalog.html?brand=syrdaspasta" class="brand-card-corel reveal-card fon-syrdaspasta">
+                    <img src="assets/brands/syrdaspasta-logo.png" alt="Syrdas Pasta" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/syrdaspasta-product.png" alt="Syrdas Pasta Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 12. Lover -->
+                <a href="catalog.html?brand=lover" class="brand-card-corel reveal-card fon-lover">
+                    <img src="assets/brands/lover-logo.png" alt="Lover" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/lover-product.png" alt="Lover Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 13. Morsello -->
+                <a href="catalog.html?brand=morsello" class="brand-card-corel reveal-card fon-morsello">
+                    <img src="assets/brands/morsello-logo.png" alt="Morsello" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/morsello-product.png" alt="Morsello Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+                <!-- 14. Karalina -->
+                <a href="catalog.html?brand=karalina" class="brand-card-corel reveal-card fon-karalina">
+                    <img src="assets/brands/karalina-logo.png" alt="Karalina" class="brand-logo-perf" onerror="this.style.display='none'">
+                    <img src="assets/brands/karalina-product.png" alt="Karalina Product" class="brand-product-perf" onerror="this.style.display='none'">
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕРТИФИКАТЫ -->
+    <section id="certificates" class="certificates-section animated-gradient-light">
+        <div style="width: 100%; max-width: 1200px; margin: 0 auto; text-align: center;">
+            <h2 style="font-size: 26px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; color: #2C1E1A;" data-i18n="cert-title">Стандарты качества</h2>
+            <p style="color: #8C6D53; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 35px; font-weight: 700;" data-i18n="cert-subtitle">Международный контроль производства</p>
+            
+            <div class="swiper certSwiper">
+                <div class="swiper-wrapper">
+                    <script>
+                        for(let i=1; i<=11; i++) {
+                            document.write(`<div class="swiper-slide"><div class="cert-card"><img src="assets/sertificates/cert-${i}.png" class="cert-img" onclick="openCertModal(this.src)"></div></div>`);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ СЕРТИФИКАТОВ -->
+    <div id="certModal" style="position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 20px;" onclick="closeCertModal()">
+        <div style="position: relative; max-width: 900px; max-height: 90vh; padding: 20px; background: #1A1816; border: 1px solid rgba(251,191,36,0.4); border-radius: 16px; display: flex; flex-direction: column; align-items: center;" onclick="event.stopPropagation()">
+            <button onclick="closeCertModal()" style="position: absolute; top: 10px; right: 15px; color: #FBBF24; background: none; border: none; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</button>
+            <img id="modalCertImg" src="" style="max-height: 80vh; width: auto; border-radius: 8px;">
+        </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer class="animated-gradient-bg">
+        <div class="footer-grid">
+            <div>
+                <h3 data-i18n="footer-brands">Наши Бренды</h3>
+                <ul>
+                    <li><a href="catalog.html">Altyn Dag / Syrdas / Babella</a></li>
+                    <li><a href="catalog.html">Mikoo / Chocoley / Janym</a></li>
+                    <li><a href="catalog.html" style="color: #FBBF24; font-weight: bold;" data-i18n="footer-catalog-link">Оптовый каталог →</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 data-i18n="footer-company">О Компании</h3>
+                <ul>
+                    <li><a href="#" data-i18n="footer-about">О фабрике Doganlar Ýyldyzy</a></li>
+                    <li><a href="#certificates" data-i18n="nav-quality">Сертификаты качества</a></li>
+                </ul>
+            </div>
+            <div>
+                <img src="assets/logo/factory-main.png" alt="Logo" style="height: 30px; margin-bottom: 12px;">
+                <p style="font-size: 12px; color: #aaa; margin-bottom: 8px;" data-i18n="footer-address">Туркменистан, г. Мары</p>
+                <p style="font-size: 12px; margin-bottom: 8px;"><a href="mailto:info@doganlaryyldyzy.com" style="color: #D4C5B9; text-decoration: none;">info@doganlaryyldyzy.com</a></p>
+                
+                <div class="footer-socials">
+                    <a href="https://instagram.com" target="_blank" class="footer-soc-btn soc-ig">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" data-i18n="footer-rights">
+            © 2026 Кондитерская фабрика «Doganlar Ýyldyzy». Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const translations = {
+            ru: {
+                "nav-brands": "Бренды", "nav-quality": "Качество", "nav-catalog": "Каталог", "btn-catalog": "Catalog 2026",
+                "main-title": "Кондитерская фабрика «Doganlar Ýyldyzy»", "main-subtitle": "Нажмите на бренд для перехода в оптовый каталог",
+                "cert-title": "Стандарты качества", "cert-subtitle": "Международный контроль производства",
+                "footer-brands": "Наши Бренды", "footer-catalog-link": "Оптовый каталог →", "footer-company": "О Компании",
+                "footer-about": "О фабрике Doganlar Ýyldyzy", "footer-address": "Туркменистан, г. Мары",
+                "footer-rights": "© 2026 Кондитерская фабрика «Doganlar Ýyldyzy». Все права защищены."
+            },
+            en: {
+                "nav-brands": "Brands", "nav-quality": "Quality", "nav-catalog": "Catalog", "btn-catalog": "Catalog 2026",
+                "main-title": "Confectionery Factory «Doganlar Ýyldyzy»", "main-subtitle": "Click on a brand to open the wholesale catalog",
+                "cert-title": "Quality Standards", "cert-subtitle": "International Production Control",
+                "footer-brands": "Our Brands", "footer-catalog-link": "Wholesale Catalog →", "footer-company": "About Company",
+                "footer-about": "About Doganlar Ýyldyzy Factory", "footer-address": "Turkmenistan, Mary city",
+                "footer-rights": "© 2026 Confectionery Factory «Doganlar Ýyldyzy». All rights reserved."
+            },
+            tk: {
+                "nav-brands": "Brendler", "nav-quality": "Hili", "nav-catalog": "Katalog", "btn-catalog": "Catalog 2026",
+                "main-title": "«Doganlar Ýyldyzy» Konditer Fabrigi", "main-subtitle": "Lomaý katalogyna geçmek üçin brend basyň",
+                "cert-title": "Hilli Standartlary", "cert-subtitle": "Halkara Onümçilik Gözegçiligi",
+                "footer-brands": "Brendlerimiz", "footer-catalog-link": "Lomaý Katalog →", "footer-company": "Kompaniya Hakynda",
+                "footer-about": "Doganlar Ýyldyzy fabrigi barada", "footer-address": "Türkmenistan, Mary ş.",
+                "footer-rights": "© 2026 «Doganlar Ýyldyzy» Konditer Fabrigi. Ähli hukuklar goralan."
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('site-lang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            document.getElementById('langSwitch').value = lang;
+        }
+
+        new Swiper('.heroSwiper', {
+            loop: true,
+            autoplay: { delay: 4500, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            speed: 800,
+        });
+
+        new Swiper('.certSwiper', {
+            loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false },
+            slidesPerView: 1,
+            spaceBetween: 20,
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+            },
+            speed: 600,
+        });
+
+        // Модальное окно сертификатов
+        function openCertModal(src) { document.getElementById('modalCertImg').src = src; document.getElementById('certModal').style.display = 'flex'; }
+        function closeCertModal() { document.getElementById('certModal').style.display = 'none'; }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedLang = localStorage.getItem('site-lang') || 'ru';
+            changeLanguage(savedLang);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, (index % 2) * 100); 
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            document.querySelectorAll('.reveal-card').forEach((card) => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
