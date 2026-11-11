@@ -114,15 +114,19 @@ const productsData = [
     { code: "A-093", brand: "syrdas", name: "Syrdas Truffle type candies with lemon flavor", weight: "1000 gr", pack: "6 коробок" },
     { code: "A-094", brand: "syrdas", name: "Syrdas Milk bar", weight: "1000 gr", pack: "4 коробки" },
     { code: "A-095", brand: "syrdas", name: "Syrdas Bitter bar", weight: "1000 gr", pack: "6 коробок" },
-    { code: "A-096", brand: "syrdas", name: "Syrdas Bitter dessert paste", weight: "500 gr", pack: "12 шт" },
-    { code: "A-097", brand: "syrdas", name: "Syrdas Bitter dessert paste", weight: "350 gr", pack: "12 шт" },
-    { code: "A-098", brand: "syrdas", name: "Syrdas Bitter dessert paste", weight: "150 gr", pack: "12 шт" },
-    { code: "A-099", brand: "syrdas", name: "Syrdas Dessert paste with peanut taste", weight: "500 gr", pack: "12 шт" },
-    { code: "A-100", brand: "syrdas", name: "Syrdas Dessert paste with peanut taste", weight: "350 gr", pack: "12 шт" },
-    { code: "A-101", brand: "syrdas", name: "Syrdas Dessert paste with peanut taste", weight: "150 gr", pack: "12 шт" },
-    { code: "A-102", brand: "syrdas", name: "Syrdas Milk dessert paste", weight: "500 gr", pack: "12 шт" },
-    { code: "A-103", brand: "syrdas", name: "Syrdas Milk dessert paste", weight: "350 gr", pack: "12 шт" },
-    { code: "A-104", brand: "syrdas", name: "Syrdas Milk dessert paste", weight: "150 gr", pack: "12 шт" },
+
+    // --- SYRDAS PASTA ---
+    { code: "A-096", brand: "syrdaspasta", name: "Syrdas Bitter dessert paste", weight: "500 gr", pack: "12 шт" },
+    { code: "A-097", brand: "syrdaspasta", name: "Syrdas Bitter dessert paste", weight: "350 gr", pack: "12 шт" },
+    { code: "A-098", brand: "syrdaspasta", name: "Syrdas Bitter dessert paste", weight: "150 gr", pack: "12 шт" },
+    { code: "A-099", brand: "syrdaspasta", name: "Syrdas Dessert paste with peanut taste", weight: "500 gr", pack: "12 шт" },
+    { code: "A-100", brand: "syrdaspasta", name: "Syrdas Dessert paste with peanut taste", weight: "350 gr", pack: "12 шт" },
+    { code: "A-101", brand: "syrdaspasta", name: "Syrdas Dessert paste with peanut taste", weight: "150 gr", pack: "12 шт" },
+    { code: "A-102", brand: "syrdaspasta", name: "Syrdas Milk dessert paste", weight: "500 gr", pack: "12 шт" },
+    { code: "A-103", brand: "syrdaspasta", name: "Syrdas Milk dessert paste", weight: "350 gr", pack: "12 шт" },
+    { code: "A-104", brand: "syrdaspasta", name: "Syrdas Milk dessert paste", weight: "150 gr", pack: "12 шт" },
+
+    // --- SYRDAS (Продолжение) ---
     { code: "A-105", brand: "syrdas", name: "Syrdas Peanut flavored bar", weight: "84 gr", pack: "12 шт" },
     { code: "A-106", brand: "syrdas", name: "Syrdas Peanut flavored bar", weight: "84 gr", pack: "12 шт" },
     { code: "A-107", brand: "syrdas", name: "Syrdas Peanut flavored bar (NEW YEAR)", weight: "84 gr", pack: "12 шт" },
